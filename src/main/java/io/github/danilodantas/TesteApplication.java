@@ -13,7 +13,7 @@ public class TesteApplication {
 	@Autowired
 	private MinhaConfiguration minhaconfig;
 	
-	@GetMapping("/hello")
+	@GetMapping("/")
 	public String helloWorld() {
 		return minhaconfig.applicationName();
 	}

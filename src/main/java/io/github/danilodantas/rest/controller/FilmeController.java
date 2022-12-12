@@ -11,44 +11,44 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import io.github.danilodantas.domain.entity.Cliente;
-import io.github.danilodantas.domain.repository.Clientes;
-
 import static org.springframework.http.HttpStatus.*;
 
 import java.util.Optional;
 
+import io.github.danilodantas.domain.entity.Filme;
+import io.github.danilodantas.domain.repository.Filmes;
+
 @RestController
-@RequestMapping("/api/clientes")
-public class ClienteController {
+@RequestMapping("/api/filmes")
+public class FilmeController {
 
 	@Autowired
-	private Clientes clientes;
-
-	// BUSCAR CLIENTE
+	private Filmes filmes;
+	
+	//BUSCAR FILME
 	@GetMapping("{id}")
-	public Cliente buscarCliente(@PathVariable Integer id) {
-		return clientes.findById(id)
-				.orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Cliente não encontrado"));
+	public Filme buscarFilme( @PathVariable Integer id) {
+		return filmes.findById(id).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Filme não encontrado."));
 	}
-
-	// INSERIR CLIENTE
+	
+	//INSERIR FILME
 	@PostMapping
 	@ResponseStatus(CREATED)
-	public Cliente salvarCliente(@RequestBody Cliente cliente) {
-		return clientes.save(cliente);
+	public Filme salvarFilme(@RequestBody Filme filme ) {
+		return filmes.save(filme);
 	}
-
-	// DELETAR CLIENTE
+	
+	
+	//DELETAR FILME
 	@DeleteMapping("{id}")
-	@ResponseStatus(NO_CONTENT)
-	public void deletarCliente(@PathVariable Integer id) {
-		Optional<Cliente> clienteStatus = clientes.findById(id);
-		if (clienteStatus.isPresent()) {
-			clientes.deleteById(id);
+	public String deletarFilme(@PathVariable Integer id) {
+		Optional<Filme> filmeStatus = filmes.findById(id);
+		if(filmeStatus.isPresent()) {
+			String titulo = filmes.findById(id).get().getTitulo();
+			filmes.deleteById(id);
+			return "Filme [" + titulo + "] deletado com sucesso!";
 		} else {
-			throw new ResponseStatusException(NOT_FOUND, "Cliente não encontrado");
+			throw new ResponseStatusException(NOT_FOUND, "Filme não encontrado.");
 		}
 	}
-
 }

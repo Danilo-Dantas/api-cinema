@@ -9,7 +9,10 @@ public class MinhaConfiguration {
 
 	@Bean(name = "applicationName") //NOMEANDO BEAN
 	public String applicationName() {
-		return "Oi Mundo do Spring =D";
+		return ""
+				+ "<h1>API-CINEMA</h1>  "
+				+ "<p>Essa é a minha primeira API feita em Spring Boot.</p>"
+				+ "<p>Para ter acesso ao banco, <a href='/h2-console'>clique aqui</a>";
 	}
 	
 	@Bean() //BEAN SEM NOME, SERA UTILIZADO O NOME DO METODO

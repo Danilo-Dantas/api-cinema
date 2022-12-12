@@ -1,18 +1,25 @@
 package io.github.danilodantas.domain.entity;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "filme")
 public class Filme {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Integer id;
 	
@@ -22,6 +29,4 @@ public class Filme {
 	@Column(name = "qtd_ingresso")
 	private Integer qtd_ingresso;
 	
-	@OneToMany(mappedBy = "filme")
-	private Set<Ingresso> ingresso;
 }
