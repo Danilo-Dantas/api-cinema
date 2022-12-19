@@ -27,7 +27,7 @@ public class FilmeController {
 	
 	//BUSCAR FILME
 	@GetMapping("{id}")
-	public Filme buscarFilme( @PathVariable Integer id) {
+	public Filme buscarFilme( @PathVariable Integer id) {	
 		return filmes.findById(id).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Filme não encontrado."));
 	}
 	
